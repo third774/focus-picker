@@ -2,6 +2,10 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <style>
+  :host {
+    touch-action: none;
+  }
+
   .container {
     position: relative;
   }
