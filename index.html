@@ -42,6 +42,28 @@
         gap: 1rem;
       }
 
+      @media (max-width: 800px) {
+        .grid {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+          grid-template-rows: minmax(0, 1fr) minmax(0, 2fr);
+        }
+
+        /* hide all images */
+        .grid img {
+          display: none;
+        }
+
+        /* re-enable the first three images */
+        .grid img:nth-child(-n + 3) {
+          display: block;
+        }
+
+        /* first image should take up a full row */
+        .grid img:nth-child(1) {
+          grid-column: 1 / -1;
+        }
+      }
+
       .grid img {
         width: 100%;
         height: 100%;
@@ -66,6 +88,7 @@
 
           & p {
             margin: 0;
+            font-variant-numeric: tabular-nums;
           }
 
           & a {
@@ -132,7 +155,7 @@
           id="copy-btn"
           value="object-position: 50% 50%;"
         ></sl-copy-button>
-        <p id="copy-text">object-position: 50% 50%;</p>
+        <p id="copy-text">object-position: 50%&nbsp;50%;</p>
         <a
           aria-label="View source on github"
           href="https://github.com/third774/focus-picker"
@@ -155,13 +178,16 @@
     ></script>
     <script>
       const copyBtn = document.querySelector("#copy-btn");
-      const copyInput = document.querySelector("#copy-text");
+      const copyText = document.querySelector("#copy-text");
       const picker = document.querySelector("#picker");
       const grid = document.querySelector(".grid");
       picker.addEventListener("focuspicked", (e) => {
         grid.setAttribute("style", "--position: " + event.detail.position);
         copyBtn.value = `offset-position: ${e.detail.position};`;
-        copyInput.textContent = `offset-position: ${e.detail.position};`;
+        copyText.innerHTML = `offset-position: ${e.detail.position.replace(
+          " ",
+          "&nbsp;"
+        )};`;
         // also have access to x and y values (beteween 0 and 1)
         console.log(e.detail.x, e.detail.y);
       });
