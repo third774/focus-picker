@@ -2,7 +2,7 @@
 
 [Use the focus picker tool here](https://focus-picker.pages.dev/)
 
-![Example showing focus picker in use](./focus-picker.png)
+![Example showing focus picker in use](./public/focus-picker.png)
 
 This is a web component successor to [image-focus](https://github.com/third774/image-focus).
 
