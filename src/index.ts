@@ -103,10 +103,7 @@ class FocusPicker extends HTMLElement {
     this.style.setProperty("--top", `${y * 100}%`);
     this.style.setProperty("--left", `${x * 100}%`);
 
-    const positionX = Math.round(x * 100);
-    const positionY = Math.round(y * 100);
-
-    const position = `${positionX}% ${positionY}%`;
+    const position = `${(x * 100).toFixed(3)}% ${(y * 100).toFixed(3)}%`;
     const event = new CustomEvent("focuspicked", {
       detail: { position, x, y },
     });
