@@ -11,9 +11,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build --minify --outDir lib",
-    "build-lib": "tsup src/index.tsx --format cjs,esm --minify --dts-resolve",
-    "deploy": "npm run build && wrangler pages deploy ./lib"
+    "build:website": "vite build",
+    "build-lib": "tsup src/index.tsx --format cjs,esm --minify --dts-resolve"
   },
   "keywords": [],
   "author": "",
