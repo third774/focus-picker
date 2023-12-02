@@ -71,22 +71,26 @@ class FocusPicker extends HTMLElement {
   isDragging = false;
 
   handlePointerDown(e: PointerEvent) {
+    if (e.cancelable) e.preventDefault();
     this.isDragging = true;
     // capture the pointer so we can drag outside the element
     this.setPointerCapture(e.pointerId);
   }
 
   handlePointerUp(e: PointerEvent) {
+    if (e.cancelable) e.preventDefault();
     this.handlePointerMove(e);
     this.handleEndDragging(e);
   }
 
   handleEndDragging(e: PointerEvent) {
+    if (e.cancelable) e.preventDefault();
     this.isDragging = false;
     this.releasePointerCapture(e.pointerId);
   }
 
   handlePointerMove(e: PointerEvent) {
+    if (e.cancelable) e.preventDefault();
     if (!this.isDragging) {
       return;
     }
