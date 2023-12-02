@@ -63,6 +63,9 @@ class FocusPicker extends HTMLElement {
     this.addEventListener("pointermove", (e) => this.handlePointerMove(e));
     this.addEventListener("pointerup", (e) => this.handlePointerUp(e));
     this.addEventListener("pointercancel", (e) => this.handleEndDragging(e));
+    this.addEventListener("lostpointercapture", (e) =>
+      this.handleEndDragging(e)
+    );
   }
 
   isDragging = false;
