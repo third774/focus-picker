@@ -1,0 +1,20 @@
+{
+  "name": "focus-picker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --minify --outDir lib",
+    "build-lib": "tsup src/index.tsx --format cjs,esm --minify --dts-resolve",
+    "deploy": "npm run build && wrangler pages deploy ./lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.4"
+  }
+}
