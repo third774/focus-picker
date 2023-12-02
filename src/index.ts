@@ -2,16 +2,12 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <style>
-  :host {
+  .container {
     position: relative;
-    --top: 50%;
-    --left: 50%;
   }
 
   svg {
     position: absolute;
-    top: var(--top);
-    left: var(--left);
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -20,15 +16,24 @@ template.innerHTML = `
     pointer-events: none;
   }
 </style>
-<slot></slot>
-<svg height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="10" cy="10" r="9" fill="rgba(0,0,0,0.5)" />
-  <circle cx="10" cy="10" r="8" fill="rgba(0,0,0,0)" stroke="white" stroke-width="3" />
-</svg>
+<div class="container">
+  <slot></slot>
+  <svg style="top: 50%; left: 50%;" height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10" cy="10" r="9" fill="rgba(0,0,0,0.5)" />
+    <circle cx="10" cy="10" r="8" fill="rgba(0,0,0,0)" stroke="white" stroke-width="3" />
+  </svg>
+</div>
 `;
 
 class FocusPicker extends HTMLElement {
   img: HTMLImageElement | HTMLPictureElement;
+  get indicator() {
+    const svg = this.shadowRoot?.querySelector("svg");
+    if (!svg) {
+      throw new Error("svg not found");
+    }
+    return svg;
+  }
   onfocuspicked: Function | null = null;
 
   static get observedAttributes() {
@@ -104,8 +109,8 @@ class FocusPicker extends HTMLElement {
       1
     );
 
-    this.style.setProperty("--top", `${y * 100}%`);
-    this.style.setProperty("--left", `${x * 100}%`);
+    this.indicator.style.top = `${y * 100}%`;
+    this.indicator.style.left = `${x * 100}%`;
 
     const position = `${(x * 100).toFixed(3)}% ${(y * 100).toFixed(3)}%`;
     const event = new CustomEvent("focuspicked", {
